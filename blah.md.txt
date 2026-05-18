@@ -1,0 +1,334 @@
+# Azure Hands-on Lab
+
+## Objective
+
+This lab demonstrates how to:
+
+- Create an Azure Virtual Machine (VM)
+- Deploy Azure SQL Server and SQL Database
+- Configure Firewall Access
+- Test SQL Database Connectivity
+
+---
+
+# Prerequisites
+
+Before starting:
+
+- Microsoft Azure Account
+- Internet Connection
+- Web Browser
+
+Azure Portal:
+
+https://portal.azure.com
+
+---
+
+# Part 1 — Create Resource Group
+
+## Step 1: Open Resource Groups
+
+1. Login to Azure Portal
+2. From left-side menu click:
+
+   Resource groups
+
+---
+
+## Step 2: Create Resource Group
+
+1. Click:
+
+   + Create
+
+2. Fill the details:
+
+| Field | Value |
+|------|------|
+| Subscription | Default Subscription |
+| Resource Group Name | lab-rg |
+| Region | North Europe |
+
+3. Click:
+
+   Review + Create
+
+4. Click:
+
+   Create
+
+5. Wait until deployment completes.
+
+---
+
+# Part 2 — Create Azure Virtual Machine
+
+## Step 1: Open Virtual Machines
+
+1. From left-side menu click:
+
+   Virtual machines
+
+2. Click:
+
+   + Create
+
+3. Select:
+
+   Azure virtual machine
+
+---
+
+## Step 2: Configure Basic Settings
+
+### Project Details
+
+| Field | Value |
+|------|------|
+| Subscription | Default |
+| Resource Group | lab-rg |
+
+---
+
+### Instance Details
+
+| Field | Value |
+|------|------|
+| Virtual Machine Name | labvm01 |
+| Region | North Europe |
+| Availability Options | No infrastructure redundancy required |
+| Security Type | Standard |
+| Image | Windows Server 2022 Datacenter |
+| VM Architecture | x64 |
+| Size | Standard B1s |
+
+---
+
+### Administrator Account
+
+| Field | Value |
+|------|------|
+| Username | azureuser |
+| Password | Your Strong Password |
+
+---
+
+### Inbound Port Rules
+
+| Field | Value |
+|------|------|
+| Public Inbound Ports | Allow selected ports |
+| Select Inbound Ports | RDP (3389) |
+
+---
+
+## Step 3: Configure Disks
+
+1. Leave default settings
+2. Click:
+
+   Next: Networking >
+
+---
+
+## Step 4: Configure Networking
+
+1. Keep default settings
+2. Click:
+
+   Review + Create
+
+3. Click:
+
+   Create
+
+4. Wait for deployment completion.
+
+---
+
+# Part 3 — Connect to Virtual Machine
+
+## Step 1: Open VM
+
+1. Click:
+
+   Go to resource
+
+---
+
+## Step 2: Connect using RDP
+
+1. Click:
+
+   Connect
+
+2. Select:
+
+   RDP
+
+3. Click:
+
+   Download RDP File
+
+4. Open downloaded file
+
+5. Enter:
+
+| Field | Value |
+|------|------|
+| Username | azureuser |
+| Password | VM Password |
+
+6. Login successfully.
+
+---
+
+# Part 4 — Create Azure SQL Database
+
+## Step 1: Open SQL Databases
+
+1. In Azure Portal search bar type:
+
+   SQL databases
+
+2. Open SQL databases
+
+---
+
+## Step 2: Create Database
+
+1. Click:
+
+   + Create
+
+---
+
+## Step 3: Configure Database
+
+### Project Details
+
+| Field | Value |
+|------|------|
+| Subscription | Default |
+| Resource Group | lab-rg |
+
+---
+
+### Database Details
+
+| Field | Value |
+|------|------|
+| Database Name | labsql112345 |
+
+---
+
+## Step 4: Create SQL Server
+
+1. Under Server click:
+
+   Create new
+
+2. Fill details:
+
+| Field | Value |
+|------|------|
+| Server Name | labsql112345 |
+| Location | North Europe |
+| Authentication Method | SQL Authentication |
+| Server Admin Login | sqladmin |
+| Password | Strong Password |
+
+3. Click:
+
+   OK
+
+---
+
+## Step 5: Configure Compute + Storage
+
+1. Click:
+
+   Configure database
+
+2. Select:
+
+   Basic
+
+3. Click:
+
+   Apply
+
+---
+
+# Part 5 — Configure Firewall Access
+
+## Step 1: Open Networking
+
+1. Open SQL Database
+2. Click:
+
+   Set server firewall
+
+---
+
+## Step 2: Add Client IP Address
+
+1. Under Firewall Rules click:
+
+   + Add your client IPv4 address
+
+2. Azure automatically detects your IP address.
+
+---
+
+## Step 3: Allow Azure Services
+
+1. Enable:
+
+   Allow Azure services and resources to access this server
+
+---
+
+## Step 4: Save Firewall Rules
+
+1. Click:
+
+   Save
+
+2. Wait for successful update message.
+
+---
+
+# Part 6 — Test SQL Database Connection
+
+## Step 1: Open Query Editor
+
+1. Open SQL Database
+2. From left-side menu click:
+
+   Query editor (preview)
+
+---
+
+## Step 2: Login
+
+Enter:
+
+| Field | Value |
+|------|------|
+| Username | sqladmin |
+| Password | SQL Password |
+
+Click:
+
+Connect
+
+---
+
+## Step 3: Run Test Query
+
+Inside query editor enter:
+
+```sql
+SELECT GETDATE();
